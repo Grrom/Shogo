@@ -14,6 +14,8 @@ public class RoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
 
+        getSupportActionBar().setTitle("Reserve a room");
+
 
         Button reserveButton = findViewById(R.id.reserve_button);
 

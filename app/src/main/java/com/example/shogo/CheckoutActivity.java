@@ -13,6 +13,8 @@ public class CheckoutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
 
+        getSupportActionBar().setTitle("Confirm reservation");
+
         Button confirmButton = findViewById(R.id.confirm_button);
 
         confirmButton.setOnClickListener(view -> {
