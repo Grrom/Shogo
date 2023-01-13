@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.shogo.R;
 import com.example.shogo.adapters.RoomAdapter;
 import com.example.shogo.databinding.FragmentRoomsBinding;
+import com.example.shogo.helpers.ShogoConstants;
 import com.example.shogo.models.RoomModel;
 import com.example.shogo.models.RoomType;
 
@@ -40,18 +41,8 @@ public class RoomsFragment extends Fragment {
     }
 
     public void setupRooms() {
-        int[] roomsImgClassic =  {R.drawable.classic_1, R.drawable.classic_2, R.drawable.classic_3};
-        int[] roomsImgDeluxe =  { R.drawable.deluxe_1, R.drawable.deluxe_2,R.drawable.deluxe_3};
-
         rooms.clear();
-
-        for (int i = 1; i <= roomsImgClassic.length; i++) {
-            rooms.add(new RoomModel(i,RoomType.classic,roomsImgClassic[i-1], "Classic room " + i, 100.00 + (i*10)));
-        }
-
-        for (int i = 1; i <= roomsImgDeluxe.length; i++) {
-            rooms.add(new RoomModel(i,RoomType.deluxe,roomsImgDeluxe[i-1], "Deluxe room " + i, 300.00 + (i*20)));
-        }
+        rooms.addAll(ShogoConstants.getRooms());
     }
 
     @Override

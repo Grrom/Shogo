@@ -17,12 +17,12 @@ public class RoomModel implements Serializable {
         this.price = price;
     }
 
-    public String getDescription() {
-        return "So Clean So Good.";
-    }
-
     public RoomType getRoomType() {
         return roomType;
+    }
+
+    public int getId() {
+        return id;
     }
 
 

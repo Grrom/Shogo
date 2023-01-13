@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.shogo.R;
 import com.example.shogo.adapters.ReservationsAdapter;
 import com.example.shogo.databinding.FragmentReservationsBinding;
+import com.example.shogo.helpers.ReservationDbHelper;
 import com.example.shogo.models.ReservationModel;
 import com.example.shogo.models.RoomModel;
 import com.example.shogo.models.RoomType;
@@ -44,9 +45,8 @@ public class ReservationsFragment extends Fragment {
     }
 
     public void setupReservations() {
-        for (int i = 0; i < 12; i++) {
-            reservations.add(new ReservationModel(new RoomModel(i,RoomType.deluxe,R.drawable.shogo, "Deluxe room", 100.1), new Time(1), new Date(2)));
-        }
+        reservations.clear();
+        reservations.addAll(ReservationDbHelper.getReservations(getContext()));
     }
 
     @Override

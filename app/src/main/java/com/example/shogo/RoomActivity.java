@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.shogo.helpers.CustomTimePicker;
 import com.example.shogo.helpers.Helpers;
+import com.example.shogo.helpers.ReservationDbHelper;
 import com.example.shogo.models.ReservationModel;
 import com.example.shogo.models.RoomModel;
 
@@ -89,6 +90,11 @@ public class RoomActivity extends AppCompatActivity {
                 Toast.makeText(this, "Please fill all the fields.", Toast.LENGTH_LONG).show();
                 return;
             }
+            Log.e("FFF", "onCreate: "+selectedTime );
+
+            ReservationDbHelper.createReservation(this, new ReservationModel("", room, selectedTime, selectedDate));
+            onBackPressed();
+
 
             return;
 
