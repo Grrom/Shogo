@@ -1,6 +1,8 @@
 package com.example.shogo.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,9 +47,21 @@ public class ReservationsAdapter extends RecyclerView.Adapter<ReservationsAdapte
         holder.time.setText(Helpers.timeFormatter.format(reservations.get(position).getCheckInTime()));
 
         holder.cancel.setOnClickListener(view->{
-            ReservationDbHelper.deleteReservation(context, holder.id);
-            reservations.removeIf(re->re.getId()==holder.id);
-            this.notifyItemRemoved(position);
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setCancelable(true);
+            builder.setTitle("Cancel Reservation");
+            builder.setMessage("Are you sure you want to cancel this reservation?");
+            builder.setPositiveButton("Confirm",
+                    (dialog, which) -> {
+                        ReservationDbHelper.deleteReservation(context, holder.id);
+                        reservations.removeIf(re->re.getId()==holder.id);
+                        notifyItemRemoved(position);
+                    });
+            builder.setNegativeButton("Cancel", (dialog, which) -> {
+            });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
         });
     }
 

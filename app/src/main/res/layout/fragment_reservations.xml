@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/bg_light"
     android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".ui.reservations.ReservationsFragment">
 
     <EditText
