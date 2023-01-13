@@ -40,7 +40,9 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.MyViewHolder> 
         holder.price.setText(String.valueOf(rooms.get(position).getPrice()));
         holder.image.setImageResource(rooms.get(position).getImage());
         holder.viewButton.setOnClickListener(view -> {
-            context.startActivity(new Intent(context, RoomActivity.class));
+            Intent intent = new Intent(context, RoomActivity.class);
+            intent.putExtra("theRoom", rooms.get(position));
+            context.startActivity(intent);
         });
     }
 

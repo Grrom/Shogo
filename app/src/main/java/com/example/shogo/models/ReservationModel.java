@@ -5,10 +5,10 @@ import java.util.Date;
 
 public class ReservationModel {
     RoomModel room;
-    Time checkInTime;
+    Date checkInTime;
     Date checkInDate;
 
-    public ReservationModel(RoomModel room, Time checkInTime, Date checkInDate) {
+    public ReservationModel(RoomModel room, Date checkInTime, Date checkInDate) {
         this.room = room;
         this.checkInTime = checkInTime;
         this.checkInDate = checkInDate;
@@ -18,7 +18,7 @@ public class ReservationModel {
         return room;
     }
 
-    public Time getCheckInTime() {
+    public Date getCheckInTime() {
         return checkInTime;
     }
 
