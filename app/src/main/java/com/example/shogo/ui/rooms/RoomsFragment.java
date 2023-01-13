@@ -1,6 +1,7 @@
 package com.example.shogo.ui.rooms;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.shogo.R;
 import com.example.shogo.adapters.RoomAdapter;
 import com.example.shogo.databinding.FragmentRoomsBinding;
+import com.example.shogo.helpers.ReservationDbHelper;
 import com.example.shogo.helpers.ShogoConstants;
+import com.example.shogo.models.ReservationModel;
 import com.example.shogo.models.RoomModel;
 import com.example.shogo.models.RoomType;
 
@@ -23,6 +26,7 @@ public class RoomsFragment extends Fragment {
 
     private FragmentRoomsBinding binding;
     ArrayList<RoomModel> rooms = new ArrayList<>();
+    RoomAdapter adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -33,7 +37,7 @@ public class RoomsFragment extends Fragment {
 
         setupRooms();
 
-        RoomAdapter adapter = new RoomAdapter(getContext(), rooms);
+        adapter = new RoomAdapter(getContext(), rooms);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -43,6 +47,17 @@ public class RoomsFragment extends Fragment {
     public void setupRooms() {
         rooms.clear();
         rooms.addAll(ShogoConstants.getRooms());
+        rooms.removeIf(rr->ReservationDbHelper.getReservedRoomsIds(getContext()).contains(rr.getId()));
+
+        if(adapter!=null){
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        setupRooms();
+        super.onResume();
     }
 
     @Override

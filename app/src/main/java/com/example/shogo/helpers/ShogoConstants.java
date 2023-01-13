@@ -29,7 +29,7 @@ public class ShogoConstants {
         }
 
         for (int i = 1; i <= roomsImgDeluxe.length; i++) {
-            rooms.add(new RoomModel(i,RoomType.deluxe,roomsImgDeluxe[i-1], "Deluxe room " + i, 300.00 + (i*20)));
+            rooms.add(new RoomModel(i+roomsImgClassic.length,RoomType.deluxe,roomsImgDeluxe[i-1], "Deluxe room " + i, 300.00 + (i*20)));
         }
 
         return rooms;

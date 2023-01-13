@@ -9,6 +9,7 @@ import android.provider.BaseColumns;
 import android.util.Log;
 
 import com.example.shogo.models.ReservationModel;
+import com.example.shogo.models.RoomModel;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -114,6 +115,40 @@ public class ReservationDbHelper extends SQLiteOpenHelper {
         cursor.close();
 
         return reservations;
+    }
+
+    public static ArrayList<Integer> getReservedRoomsIds(Context context)  {
+        ReservationDbHelper dbHelper = new ReservationDbHelper(context);
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String[] projection = {
+                BaseColumns._ID,
+                AppointmentContract.FeedEntry.ROOM_ID,
+        };
+
+
+        Cursor cursor = db.query(
+                AppointmentContract.FeedEntry.TABLE_NAME,   // The table to query
+                projection,             // The array of columns to return (pass null to get all)
+                null,              // The columns for the WHERE clause
+                null,          // The values for the WHERE clause
+                null,                   // don't group the rows
+                null,                   // don't filter by row groups
+                null               // The sort order
+        );
+
+
+        ArrayList<Integer> roomIds = new ArrayList<>();
+
+        while(cursor.moveToNext()) {
+            int _room_id= cursor.getInt(cursor.getColumnIndexOrThrow(AppointmentContract.FeedEntry.ROOM_ID));
+            roomIds.add(_room_id);
+
+        }
+        cursor.close();
+
+        return roomIds;
     }
 
 

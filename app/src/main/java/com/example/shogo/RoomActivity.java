@@ -38,6 +38,7 @@ public class RoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
 
+
         RoomModel room = (RoomModel)getIntent().getSerializableExtra("theRoom");
 
         getSupportActionBar().setTitle("Reserve a room");
@@ -67,7 +68,13 @@ public class RoomActivity extends AppCompatActivity {
             } ,today.get(Calendar.YEAR) , today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH));
 
 
+
             dp.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+
+//            Calendar hehe =  Calendar.getInstance() ;
+//            hehe.add(Calendar.DATE, 5);
+//            dp.getDatePicker().setMaxDate(hehe.getTimeInMillis());
+
             dp.show();
         });
 
