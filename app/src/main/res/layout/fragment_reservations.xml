@@ -5,7 +5,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_light"
+    android:orientation="vertical"
     tools:context=".ui.reservations.ReservationsFragment">
+
+    <EditText
+        android:id="@+id/search_reservation"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="input name of room."
+        />
+
+    <LinearLayout
+        android:gravity="end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Space
+            android:layout_weight="3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_weight="1"
+            android:text="price range:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Spinner
+            android:id="@+id/price_range"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:entries="@array/price_range"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reservations_recycler_view"

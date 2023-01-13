@@ -39,7 +39,7 @@ public class ReservationsAdapter extends RecyclerView.Adapter<ReservationsAdapte
        holder.id = reservations.get(position).getId();
 
         holder.name.setText(reservations.get(position).getRoom().getName());
-        holder.price.setText(String.valueOf(reservations.get(position).getRoom().getPrice()));
+        holder.price.setText(reservations.get(position).getRoom().getPrice()+" php");
         holder.image.setImageResource(reservations.get(position).getRoom().getImage());
         holder.date.setText(Helpers.dateFormatter.format(reservations.get(position).getCheckInDate()));
         holder.time.setText(Helpers.timeFormatter.format(reservations.get(position).getCheckInTime()));

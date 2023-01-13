@@ -37,7 +37,7 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.name.setText(rooms.get(position).getName());
-        holder.price.setText(String.valueOf(rooms.get(position).getPrice()));
+        holder.price.setText(rooms.get(position).getPrice()+" php");
         holder.image.setImageResource(rooms.get(position).getImage());
         holder.viewButton.setOnClickListener(view -> {
             Intent intent = new Intent(context, RoomActivity.class);

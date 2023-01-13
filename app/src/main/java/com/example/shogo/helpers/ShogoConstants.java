@@ -25,11 +25,11 @@ public class ShogoConstants {
         int[] roomsImgDeluxe =  { R.drawable.deluxe_1, R.drawable.deluxe_2,R.drawable.deluxe_3};
 
         for (int i = 1; i <= roomsImgClassic.length; i++) {
-            rooms.add(new RoomModel(i, RoomType.classic,roomsImgClassic[i-1], "Classic room " + i, 100.00 + (i*10)));
+            rooms.add(new RoomModel(i, RoomType.classic,roomsImgClassic[i-1], "Classic room " + i, 100 + (i*10)));
         }
 
         for (int i = 1; i <= roomsImgDeluxe.length; i++) {
-            rooms.add(new RoomModel(i+roomsImgClassic.length,RoomType.deluxe,roomsImgDeluxe[i-1], "Deluxe room " + i, 300.00 + (i*20)));
+            rooms.add(new RoomModel(i+roomsImgClassic.length,RoomType.deluxe,roomsImgDeluxe[i-1], "Deluxe room " + i, 300 + (i*20)));
         }
 
         return rooms;

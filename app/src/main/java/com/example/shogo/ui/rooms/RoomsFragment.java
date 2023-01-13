@@ -1,10 +1,17 @@
 package com.example.shogo.ui.rooms;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -34,12 +41,72 @@ public class RoomsFragment extends Fragment {
         View root = binding.getRoot();
 
         RecyclerView recyclerView = binding.roomsRecyclerView;
+        EditText searchRoom = binding.searchRoom;
+        Spinner range = binding.priceRange;
 
         setupRooms();
 
         adapter = new RoomAdapter(getContext(), rooms);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+        range.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                searchRoom.setText("");
+                String selected;
+                if(view==null){
+                    selected= "all";
+                }else{
+                    selected= ((TextView)view).getText().toString();
+                }
+
+                setupRooms();
+
+                if(!selected.equals("all")){
+                    if(selected.equals("less than 100 php")){
+                        rooms.removeIf(s -> s.getPrice()>100);
+                    }else if(selected.equals("100 - 300 php")){
+                        rooms.removeIf(s -> s.getPrice()<100 || s.getPrice()>300);
+                    }else if(selected.equals("more than 300 php")){
+                        rooms.removeIf(s -> s.getPrice()<300);
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        searchRoom.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable chars) {
+                String input = chars.toString();
+
+                if(!input.isEmpty()){
+                    range.setSelection(0);
+                }
+
+                setupRooms();
+                rooms.removeIf(s -> !(s.getName()).toLowerCase().contains((input.toLowerCase())));
+
+                adapter.notifyDataSetChanged();
+            }
+        } );
 
         return root;
     }

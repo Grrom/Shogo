@@ -7,9 +7,9 @@ public class RoomModel implements Serializable {
     RoomType roomType;
     int image;
     String name;
-    double price;
+    int price;
 
-    public RoomModel(int id,RoomType roomType, int image, String name, double price) {
+    public RoomModel(int id,RoomType roomType, int image, String name, int price) {
         this.id = id;
         this.roomType=roomType;
         this.image = image;
@@ -34,7 +34,7 @@ public class RoomModel implements Serializable {
         return name;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 }
